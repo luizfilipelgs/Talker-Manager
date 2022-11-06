@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const { validateEmail, validatePassword } = require('./middleware/ValidateLogin');
 const createToken = require('./utils/token');
 const { getAllTalkers, createNewUser } = require('./utils/handleTalkers');
+const { validateToken } = require('./middleware/ValidateToken');
+const { validateName, validateAge, validateTalk,
+  validateRate, validateWatchedAt } = require('./middleware/ValidateTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -46,10 +49,17 @@ app.post('/login', validateEmail, validatePassword, async (_req, res) => {
 });
 
 // 5º
-app.post('/talker', async (req, res) => {
-  const { name, age, talk } = req.body;
+app.post('/talker',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  async (req, res) => {
+    const { name, age, talk } = req.body;
 
-  const allTalkers = await createNewUser(name, age, talk);
-  const response = allTalkers[allTalkers.length - 1];
-  res.status(201).json(response);
+    const allTalkers = await createNewUser(name, age, talk);
+    const response = allTalkers[allTalkers.length - 1];
+    res.status(201).json(response);
 });
