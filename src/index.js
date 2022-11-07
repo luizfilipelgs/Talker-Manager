@@ -2,14 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { validateEmail, validatePassword } = require('./middleware/ValidateLogin');
 const createToken = require('./utils/token');
-const { getAllTalkers, createNewUser } = require('./utils/handleTalkers');
+const { getAllTalkers, createNewTalker, editTalker } = require('./utils/handleTalkers');
 const { validateToken } = require('./middleware/ValidateToken');
 const { validateName, validateAge, validateTalk,
   validateRate, validateWatchedAt } = require('./middleware/ValidateTalker');
 
 const app = express();
 app.use(bodyParser.json());
-
+ 
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
@@ -49,6 +49,14 @@ app.post('/login', validateEmail, validatePassword, async (_req, res) => {
 });
 
 // 5º
+// app.use(validateToken);
+/* app.use('/talker',
+validateName,
+validateAge,
+validateTalk,
+validateWatchedAt,
+validateRate); */
+
 app.post('/talker',
   validateToken,
   validateName,
@@ -59,7 +67,25 @@ app.post('/talker',
   async (req, res) => {
     const { name, age, talk } = req.body;
 
-    const allTalkers = await createNewUser(name, age, talk);
+    const allTalkers = await createNewTalker(name, age, talk);
     const response = allTalkers[allTalkers.length - 1];
     res.status(201).json(response);
+});
+
+// 6º
+app.put('/talker/:id',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+
+    const talkerEdit = await editTalker(id, body);
+    const response = talkerEdit[Number(id) - 1];
+
+    res.status(200).json(response);
 });

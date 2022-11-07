@@ -9,7 +9,7 @@ const getAllTalkers = async () => {
   return response;
 };
 
-const createNewUser = async (name, age, talk) => {
+const createNewTalker = async (name, age, talk) => {
   const allTalkers = await getAllTalkers();
   const id = Number(allTalkers[allTalkers.length - 1].id) + 1;
   allTalkers.push({
@@ -22,7 +22,16 @@ const createNewUser = async (name, age, talk) => {
   return allTalkers;
 };
 
+const editTalker = async (id, body) => {
+  const allTalkers = await getAllTalkers();
+  const talkerEdit = allTalkers
+    .map((talker) => (talker.id === Number(id) ? { id: talker.id, ...body } : talker));
+  await fs.writeFile(talkerFile, JSON.stringify(talkerEdit, null, 2));
+  return talkerEdit;
+};
+
 module.exports = {
   getAllTalkers,
-  createNewUser,
+  createNewTalker,
+  editTalker,  
 };
