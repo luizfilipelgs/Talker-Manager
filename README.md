@@ -83,7 +83,7 @@
   :warning: **Importante:** os comandos de testes podem ser executados tanto no terminal do seu computador quanto do **_Docker_**.
 </details>
 
-# Requisitos
+## Requisitos
 
 <details>
   <summary><strong>⚠️ Observações importantes!</strong></summary><br />
