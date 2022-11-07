@@ -1,7 +1,7 @@
 # Boas-vindas ao repositório do projeto Talker Manager!
 
 
->## O que foi desenvolvido 👨‍💻
+## O que foi desenvolvido 👨‍💻
 
   Uma aplicação de cadastro de talkers (palestrantes) em que foi possível cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso:
   1. Desenvolvi uma API de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers) e;
