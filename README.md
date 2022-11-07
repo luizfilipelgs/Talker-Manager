@@ -4,7 +4,7 @@
 ## O que foi desenvolvido 👨‍💻
 
   Uma aplicação de cadastro de talkers (palestrantes) em que foi possível cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso:
-  1. Desenvolvi uma API de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers) e;
+  1. Desenvolvi uma API  com Node e Express de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers);
   2. Desenvolvi alguns endpoints que irão ler e escrever em um arquivo utilizando o módulo `fs`.
 
 
