@@ -23,7 +23,7 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 //-----------------------------------------------------
-// 8º
+
 app.get('/talker/search', validateToken, async (req, res) => {
   const { q } = req.query;
   const response = await searchTalker(q);
@@ -31,13 +31,11 @@ app.get('/talker/search', validateToken, async (req, res) => {
   res.status(HTTP_OK_STATUS).json(response);
 });
 
-// 1 º
 app.get('/talker', async (_req, res) => {
   const allTalkers = await getAllTalkers();
    res.status(HTTP_OK_STATUS).json(allTalkers);
 });
 
-// 2 º
 app.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
   const allTalkers = await getAllTalkers();
@@ -51,12 +49,9 @@ app.get('/talker/:id', async (req, res) => {
   });
 });
 
-// 3º 
 app.post('/login', validateEmail, validatePassword, async (_req, res) => {
   res.status(HTTP_OK_STATUS).json({ token: createToken() });
 });
-
-// 5º
 
 app.use(validateToken);
 app.post('/talker',
@@ -73,7 +68,6 @@ app.post('/talker',
     res.status(201).json(response);
 });
 
-// 6º
 app.put('/talker/:id',
   validateName,
   validateAge,
@@ -90,7 +84,6 @@ app.put('/talker/:id',
     res.status(HTTP_OK_STATUS).json(response);
 });
 
-// 7º
 app.delete('/talker/:id', async (req, res) => {
   const { id } = req.params;
   deletTalker(id);
