@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { validateEmail, validatePassword } = require('./middleware/ValidateLogin');
 const createToken = require('./utils/token');
 const { getAllTalkers, createNewTalker,
-  editTalker, deletTalker } = require('./utils/handleTalkers');
+  editTalker, deletTalker, searchTalker } = require('./utils/handleTalkers');
 const { validateToken } = require('./middleware/ValidateToken');
 const { validateName, validateAge, validateTalk,
   validateRate, validateWatchedAt } = require('./middleware/ValidateTalker');
@@ -23,6 +23,13 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 //-----------------------------------------------------
+// 8º
+app.get('/talker/search', validateToken, async (req, res) => {
+  const { q } = req.query;
+  const response = await searchTalker(q);
+  console.log(response);
+  res.status(HTTP_OK_STATUS).json(response);
+});
 
 // 1 º
 app.get('/talker', async (_req, res) => {
@@ -50,14 +57,8 @@ app.post('/login', validateEmail, validatePassword, async (_req, res) => {
 });
 
 // 5º
-app.use(validateToken);
-/* app.use('/talker',
-validateName,
-validateAge,
-validateTalk,
-validateWatchedAt,
-validateRate); */
 
+app.use(validateToken);
 app.post('/talker',
   validateName,
   validateAge,
@@ -86,7 +87,7 @@ app.put('/talker/:id',
     const talkerEdit = await editTalker(id, body);
     const response = talkerEdit[Number(id) - 1];
 
-    res.status(200).json(response);
+    res.status(HTTP_OK_STATUS).json(response);
 });
 
 // 7º

@@ -38,9 +38,17 @@ const deletTalker = async (id) => {
   return newTalkers;
 };
 
+const searchTalker = async (query) => {
+  const allTalkers = await getAllTalkers();
+  const search = allTalkers
+    .filter((talker) => talker.name.includes(query));
+  return search;
+};
+
 module.exports = {
   getAllTalkers,
   createNewTalker,
   editTalker,
   deletTalker,
+  searchTalker,
 };
