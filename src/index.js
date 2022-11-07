@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { validateEmail, validatePassword } = require('./middleware/ValidateLogin');
 const createToken = require('./utils/token');
-const { getAllTalkers, createNewTalker, editTalker } = require('./utils/handleTalkers');
+const { getAllTalkers, createNewTalker,
+  editTalker, deletTalker } = require('./utils/handleTalkers');
 const { validateToken } = require('./middleware/ValidateToken');
 const { validateName, validateAge, validateTalk,
   validateRate, validateWatchedAt } = require('./middleware/ValidateTalker');
@@ -49,7 +50,7 @@ app.post('/login', validateEmail, validatePassword, async (_req, res) => {
 });
 
 // 5º
-// app.use(validateToken);
+app.use(validateToken);
 /* app.use('/talker',
 validateName,
 validateAge,
@@ -58,7 +59,6 @@ validateWatchedAt,
 validateRate); */
 
 app.post('/talker',
-  validateToken,
   validateName,
   validateAge,
   validateTalk,
@@ -74,7 +74,6 @@ app.post('/talker',
 
 // 6º
 app.put('/talker/:id',
-  validateToken,
   validateName,
   validateAge,
   validateTalk,
@@ -88,4 +87,11 @@ app.put('/talker/:id',
     const response = talkerEdit[Number(id) - 1];
 
     res.status(200).json(response);
+});
+
+// 7º
+app.delete('/talker/:id', async (req, res) => {
+  const { id } = req.params;
+  deletTalker(id);
+  res.status(204).json();
 });

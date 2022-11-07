@@ -30,8 +30,17 @@ const editTalker = async (id, body) => {
   return talkerEdit;
 };
 
+const deletTalker = async (id) => {
+  const allTalkers = await getAllTalkers();
+  const newTalkers = allTalkers
+    .filter((talker) => (talker.id !== Number(id)));
+  await fs.writeFile(talkerFile, JSON.stringify(newTalkers, null, 2));
+  return newTalkers;
+};
+
 module.exports = {
   getAllTalkers,
   createNewTalker,
-  editTalker,  
+  editTalker,
+  deletTalker,
 };
