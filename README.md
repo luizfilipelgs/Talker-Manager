@@ -6,15 +6,7 @@
   Uma aplicação de cadastro de talkers (palestrantes) em que foi possível cadastrar, visualizar, pesquisar, editar e excluir informações. Para isso:
   1. Desenvolvi uma API  com Node e Express de um `CRUD` (**C**reate, **R**ead, **U**pdate e **D**elete) de palestrantes (talkers);
   2. Desenvolvi alguns endpoints que irão ler e escrever em um arquivo utilizando o módulo `fs`.
-
-
-# Sumário
-
-- [Tecnologias utilizadas](#tecnologias)
-- [Orientações](#orientacoes)
-- [API](#api)
-  
-    
+ 
 
 # Tecnologias utilizadas <a name="tecnologias"></a>
 - [**Node JS**](https://nodejs.org/en/)
@@ -72,11 +64,11 @@
 # API <a name="api"></a>
 
 ## Login
-### POST /login 
+- POST /login 
 ## Talker 
-### POST /talker
-### GET /talker
-### GET /talker/ :id
-### PUT /talker/ :id
-### DELETE /talker/ :id
-### GET /talker/search?q=searchTerm
+- POST /talker
+- GET /talker
+- GET /talker/ :id
+- PUT /talker/ :id
+- DELETE /talker/ :id
+- GET /talker/search?q=searchTerm
